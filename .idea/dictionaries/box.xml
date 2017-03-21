@@ -2,6 +2,7 @@
   <dictionary name="box">
     <words>
       <w>addr</w>
+      <w>gunicorn</w>
       <w>wsgi</w>
     </words>
   </dictionary>
