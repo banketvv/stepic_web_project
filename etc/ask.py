@@ -1,5 +1,4 @@
 CONFIG = {
-    'mode': 'wsgi',
     'working_dir': '/home/box/web/ask/ask',
     'python': '/usr/bin/python',
     'args': (
@@ -8,6 +7,6 @@ CONFIG = {
         '--timeout=60',
         '--log-level=debug',
         '--log-file=/home/box/gunicorn.log',
-        'wsgi',
+        'ask.wsgi:application',
     ),
 }
