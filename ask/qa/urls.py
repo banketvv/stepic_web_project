@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from views import test
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', test, name='test'),
     url(r'^login/', test, name='login'),
     url(r'^signup/', test, name='signup'),
@@ -24,4 +24,4 @@ urlpatterns = patterns('',
     url(r'^ask/', test, name='ask'),
     url(r'^popular/', test, name='popular'),
     url(r'^new/', test, name='new'),
-)
+]
