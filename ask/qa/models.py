@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 
 
 class QuestionManager(models.Manager):
-    def new(self):
+    def new():
         pass
 
-    def popular(self):
+    def popular():
         pass
 
 
@@ -18,8 +18,8 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateField()
     rating = models.IntegerField()
-    author = models.ForeignKey(User)
-    likes = models.ManyToManyRel(User)
+    author = models.ForeignKey(User, related_name="question_author")
+    likes = models.ManyToManyField(User, related_name="question_likers")
 
 
 class Answer(models.Model):
