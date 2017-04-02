@@ -8,7 +8,7 @@ class QuestionManager(models.Manager):
     def new():
         pass
 
-    def popular():
+    def popular(self):
         pass
 
 
@@ -21,11 +21,20 @@ class Question(models.Model):
     author = models.ForeignKey(User, related_name="question_author")
     likes = models.ManyToManyField(User, related_name="question_likers")
 
+    def __unicode__(self):
+        return self.title
+
+    def get_url(self):
+        return "/question/{}/".format(self.id)
+
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField()
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.title
 
 
