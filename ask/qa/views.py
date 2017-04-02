@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, EmptyPage
-from .models import Question
+from .models import Question, Answer
 
 
 def test(request, *args, **kwargs):
@@ -60,4 +60,5 @@ def question(request, num):
     return render_to_response('question.html',
                               {
                                   "question": question_object,
+                                  "answers_list": question_object.answer_set.all(),
                               })

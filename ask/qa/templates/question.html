@@ -7,5 +7,14 @@
 <body>
     <p><b>Question:</b></p>
     <p>{{ question }}</p>
+    <p></p>
+    {% if answers_list %}
+        <p><b>Answer:</b></p>
+        <ul>
+        {%  for answer in answers_list %}
+            <li>{{ answer }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
