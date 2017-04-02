@@ -29,7 +29,7 @@ def paginate(request, qs):
 
 def latest_questions(request):
     latest_questions_list = Question.objects.all()
-    latest_questions_list = latest_questions_list.order_by('-added_at')
+    latest_questions_list = latest_questions_list.order_by('-id')
     paginator = paginate(request, latest_questions_list)
 
     return render_to_response('list.html',
