@@ -57,8 +57,15 @@ def question(request, num):
     except Question.DoesNotExist:
         raise Http404
 
+    try:
+        answers_list = question_object.answer_set.filter(question=int(num))
+    except ValueError:
+        None
+    except Answer.DoesNotExist:
+        None
+
     return render_to_response('question.html',
                               {
                                   "question": question_object,
-                                  "answers_list": question_object.answer_set.all(),
+                                  "answers_list": answers_list,
                               })
