@@ -58,7 +58,7 @@ def question(request, num):
         raise Http404
 
     try:
-        answers_list = question_object.answer_set.filter(question=int(num))
+        answers_list = Answer.objects.filter(question=int(num))
     except ValueError:
         None
     except Answer.DoesNotExist:
