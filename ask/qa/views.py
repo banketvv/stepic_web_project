@@ -1,7 +1,8 @@
-from django.http import HttpResponse, Http404
-from django.shortcuts import render_to_response
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.shortcuts import render_to_response, render
 from django.core.paginator import Paginator, EmptyPage
 from .models import Question, Answer
+from .forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
@@ -69,3 +70,19 @@ def question(request, num):
                                   "question": question_object,
                                   "answers_list": answers_list,
                               })
+
+
+def question_add(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            ask = form.save()
+            url = ask.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request,
+                  'new_question.html',
+                  {
+                      "form": form
+                  })
