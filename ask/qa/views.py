@@ -58,17 +58,19 @@ def question(request, num):
     except Question.DoesNotExist:
         raise Http404
 
-    try:
-        answers_list = Answer.objects.filter(question=int(num))
-    except ValueError:
-        None
-    except Answer.DoesNotExist:
-        None
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            url = question_object.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm(initial={'question': question_object.id})
 
     return render_to_response('question.html',
                               {
                                   "question": question_object,
-                                  "answers_list": answers_list,
+                                  "form": form,
                               })
 
 
