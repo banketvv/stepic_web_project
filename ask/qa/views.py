@@ -61,17 +61,19 @@ def question(request, num):
     if request.method == "POST":
         form = AnswerForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             answer = form.save()
             url = question_object.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AnswerForm(initial={'question': question_object.id})
 
-    return render_to_response('question.html',
-                              {
-                                  "question": question_object,
-                                  "form": form,
-                              })
+    return render(request,
+                  'question.html',
+                  {
+                      "question": question_object,
+                      "form": form,
+                  })
 
 
 def question_add(request):
@@ -83,8 +85,9 @@ def question_add(request):
             return HttpResponseRedirect(url)
     else:
         form = AskForm()
+
     return render(request,
                   'new_question.html',
                   {
-                      "form": form
+                      "form": form,
                   })
